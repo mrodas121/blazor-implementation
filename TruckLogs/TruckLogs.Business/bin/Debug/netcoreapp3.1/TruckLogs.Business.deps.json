@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "TruckLogs.Business/1.0.0": {
+        "dependencies": {
+          "TruckLogs.Entities": "1.0.0"
+        },
+        "runtime": {
+          "TruckLogs.Business.dll": {}
+        }
+      },
+      "TruckLogs.Entities/1.0.0": {
+        "runtime": {
+          "TruckLogs.Entities.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "TruckLogs.Business/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "TruckLogs.Entities/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

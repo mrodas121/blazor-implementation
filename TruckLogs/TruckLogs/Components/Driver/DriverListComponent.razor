@@ -1,0 +1,139 @@
+﻿@page "/Driver"
+@using Entities
+@using Business.Interfaces
+@using Microsoft.Extensions.Configuration
+@inject IB_Driver _b_driver;
+@inject IConfiguration _configuration;
+<div class="row">
+    <div class="col-5">
+        <a class="h2">Conductores</a>
+        <a type="button" href="Driver/New" class="btn btn-primary"><span class="oi oi-plus" aria-hidden="true"></span> Agregar Conductor</a>
+    </div>
+    <div class="col-7">
+        <div class="d-flex flex-row-reverse" style="margin-top:6px">
+            <div class="input-group" style="width:60%">
+                <input type="text" class="form-control" @bind="searchText"/>
+                <div class="input-group-append">
+                    <button class="btn btn-secondary" style="color:white" type="submit" @onclick="() => SearchDriver()">Buscar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="solid">
+<div class="card-deck">
+    @foreach (var driver in drivers)
+    {
+        <div class="card" style="max-width: 500px; min-width: 500px; margin-top:22px">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="@driver.ImageUrl" style="max-height:119px; max-width:117px">
+                    </div>
+                    <div class="col-8" style="font-size:13px">
+                        <b>Nombre:</b> @driver.DriverName<br />
+                        <b>Telefono:</b> @driver.PhoneNumber<br />
+                        <b>Nup:</b> @driver.Nup<br />
+                        <b>ISS:</b> @driver.ISSS<br />
+                        <b>Dui:</b> @driver.DUI<br />
+                        <b>Tipo de contrato:</b>@driver.HiringType<br />
+                        <b>Fecha de ingreso:</b>@driver.HiringDate<br />
+                        <b>Estado:</b>@switch (driver.DriverStatus)
+                        {
+                            case 1:<span class="badge badge-success">Activo</span><br />
+                                break;
+                            case 2:<span class="badge badge-secondary">Incapacidad</span><br />
+                                break;
+                            case 3:<span class="badge badge-danger">Inactivo</span><br />
+                                break;
+                        }
+                    </div>
+                </div>
+                <div class="d-flex flex-row-reverse" style="margin-top:6px">
+                    <div>
+                        <a type="button" href="/Driver/Edit/@driver.DriverId" class="btn btn-primary rounded-circle"><span class="oi oi-pencil" aria-hidden="true"></span></a>
+                        <button type="button" class="btn btn-secondary rounded-circle"><span class="oi oi-trash" aria-hidden="true" @onclick="() => DeleteDriver(driver)"></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    @if (ShowConfirmation)
+    {
+        <div style=" position: fixed; top: 0; left: 0; background-color: #0000005c; width: 100%; height: 100%;">
+            <div class="modal fade show d-block" id="exampleModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Confirmacion de eliminacion</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                    @onclick="() => CancelConfirmation()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ¿Esta seguro que desea eliminar el conductor? @driverToDelete.DriverName
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                    @onclick="() => CancelConfirmation()">
+                                Cancel
+                            </button>
+                            <button type="button" class="btn btn-danger"
+                                    @onclick="() => DeleteDriverConfirmation()">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    List<DriverEntity> drivers = new List<DriverEntity>();
+    string viewPath, searchText;
+    bool ShowConfirmation = false;
+    DriverEntity driverToDelete;
+    protected override async Task OnInitializedAsync()
+    {
+        viewPath = _configuration.GetSection("FileSetting:DriverViewPath").Value;
+        LoadDrivers();
+
+    }
+
+    public void LoadDrivers()
+    {
+        drivers = _b_driver.DriverList();
+        foreach (var driver in drivers)
+        {
+            driver.ImageUrl = $"{viewPath}{driver.ImageUrl}";
+        }
+    }
+    public void DeleteDriver(DriverEntity driver)
+    {
+        ShowConfirmation = true;
+        driverToDelete = driver;
+    }
+    public void SearchDriver()
+    {
+        LoadDrivers();
+        string search = searchText.ToUpper();
+        if(search != "" )drivers = drivers.Where(d=> d.DriverName.ToUpper().Contains(search) || d.DUI.ToUpper().Contains(search) || d.Nup.ToUpper().Contains(search) 
+        || d.PhoneNumber.ToUpper().Contains(search) || d.ISSS.ToUpper().Contains(search) || d.HiringDate.ToString().ToUpper().Contains(search)).ToList();
+    }
+    public void CancelConfirmation()
+    {
+        ShowConfirmation = false;
+    }
+    public void DeleteDriverConfirmation()
+    {
+        if(driverToDelete != null)
+        {
+            _b_driver.DeleteDriver(driverToDelete);
+            LoadDrivers();
+        }
+        ShowConfirmation = false;
+    }
+}

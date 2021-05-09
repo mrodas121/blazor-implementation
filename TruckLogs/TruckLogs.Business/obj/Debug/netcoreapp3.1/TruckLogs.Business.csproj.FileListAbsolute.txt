@@ -1,0 +1,12 @@
+C:\Users\Manuel Rodas\source\repos\TruckLogs\TruckLogs.Business\bin\Debug\netcoreapp3.1\TruckLogs.Business.deps.json
+C:\Users\Manuel Rodas\source\repos\TruckLogs\TruckLogs.Business\bin\Debug\netcoreapp3.1\TruckLogs.Business.dll
+C:\Users\Manuel Rodas\source\repos\TruckLogs\TruckLogs.Business\bin\Debug\netcoreapp3.1\TruckLogs.Business.pdb
+C:\Users\Manuel Rodas\source\repos\TruckLogs\TruckLogs.Business\bin\Debug\netcoreapp3.1\TruckLogs.Entities.dll
+C:\Users\Manuel Rodas\source\repos\TruckLogs\TruckLogs.Business\bin\Debug\netcoreapp3.1\TruckLogs.Entities.pdb
+C:\Users\Manuel Rodas\source\repos\TruckLogs\TruckLogs.Business\obj\Debug\netcoreapp3.1\TruckLogs.Business.csprojAssemblyReference.cache
+C:\Users\Manuel Rodas\source\repos\TruckLogs\TruckLogs.Business\obj\Debug\netcoreapp3.1\TruckLogs.Business.AssemblyInfoInputs.cache
+C:\Users\Manuel Rodas\source\repos\TruckLogs\TruckLogs.Business\obj\Debug\netcoreapp3.1\TruckLogs.Business.AssemblyInfo.cs
+C:\Users\Manuel Rodas\source\repos\TruckLogs\TruckLogs.Business\obj\Debug\netcoreapp3.1\TruckLogs.Business.csproj.CoreCompileInputs.cache
+C:\Users\Manuel Rodas\source\repos\TruckLogs\TruckLogs.Business\obj\Debug\netcoreapp3.1\TruckLogs.Business.csproj.CopyComplete
+C:\Users\Manuel Rodas\source\repos\TruckLogs\TruckLogs.Business\obj\Debug\netcoreapp3.1\TruckLogs.Business.dll
+C:\Users\Manuel Rodas\source\repos\TruckLogs\TruckLogs.Business\obj\Debug\netcoreapp3.1\TruckLogs.Business.pdb

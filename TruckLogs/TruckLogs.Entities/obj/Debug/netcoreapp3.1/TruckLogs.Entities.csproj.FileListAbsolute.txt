@@ -1,0 +1,8 @@
+C:\Users\Manuel Rodas\source\repos\TruckLogs\TruckLogs.Entities\bin\Debug\netcoreapp3.1\TruckLogs.Entities.deps.json
+C:\Users\Manuel Rodas\source\repos\TruckLogs\TruckLogs.Entities\bin\Debug\netcoreapp3.1\TruckLogs.Entities.dll
+C:\Users\Manuel Rodas\source\repos\TruckLogs\TruckLogs.Entities\bin\Debug\netcoreapp3.1\TruckLogs.Entities.pdb
+C:\Users\Manuel Rodas\source\repos\TruckLogs\TruckLogs.Entities\obj\Debug\netcoreapp3.1\TruckLogs.Entities.AssemblyInfoInputs.cache
+C:\Users\Manuel Rodas\source\repos\TruckLogs\TruckLogs.Entities\obj\Debug\netcoreapp3.1\TruckLogs.Entities.AssemblyInfo.cs
+C:\Users\Manuel Rodas\source\repos\TruckLogs\TruckLogs.Entities\obj\Debug\netcoreapp3.1\TruckLogs.Entities.csproj.CoreCompileInputs.cache
+C:\Users\Manuel Rodas\source\repos\TruckLogs\TruckLogs.Entities\obj\Debug\netcoreapp3.1\TruckLogs.Entities.dll
+C:\Users\Manuel Rodas\source\repos\TruckLogs\TruckLogs.Entities\obj\Debug\netcoreapp3.1\TruckLogs.Entities.pdb

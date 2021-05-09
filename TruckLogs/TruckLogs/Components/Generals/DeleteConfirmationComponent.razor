@@ -1,0 +1,47 @@
+﻿@if (ShowConfirmation)
+{
+    <div style=" position: fixed; top: 0; left: 0; background-color: #0000005c; width: 100%; height: 100%;">
+        <div class="modal fade show d-block" id="exampleModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Confirmacion de eliminacion</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                @onclick="() => CancelConfirmation()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @Message                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                @onclick="() => CancelConfirmation()">
+                            Cancel
+                        </button>
+                        <button type="button" class="btn btn-danger"
+                                @onclick="() => Confirm()">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    public bool ShowConfirmation = false;
+    public bool isConfirm = false;
+    public string Message { get; set; }
+
+    public void CancelConfirmation()
+    {
+        ShowConfirmation = false;
+        isConfirm = false;
+    }
+    public void Confirm()
+    {
+        isConfirm = true;
+        ShowConfirmation = false;
+    }
+}

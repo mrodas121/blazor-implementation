@@ -1,0 +1,135 @@
+﻿@page "/Driver/Edit/{id:int}"
+@using Entities
+@using Business.Interfaces
+@using TruckLogs.Pages
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration _configuration;
+@inject IB_File _b_file;
+@inject IB_Driver _b_driver;
+@inject NavigationManager NavManager
+
+<div class="row">
+    <div class="col-5">
+        <a class="h2">Agregar Conductor</a>
+    </div>
+</div>
+<hr class="solid">
+<div class="row">
+    <div class="card" style="max-width: 80%; min-width:80%; margin-top:22px;margin: 0 auto;float: none;">
+        <div class="card-body">
+            <EditForm Model="@driver" OnValidSubmit="@HandleValidSubmit">
+                <DataAnnotationsValidator />
+                <div class="row">
+                    <div class="col-5">
+                        <label for="exampleFormControlFile1">Foto conductor</label>
+                        <div class="form-group col-12">
+                            <img src="@currentImage" style="max-width: 100%;margin-bottom:20px;">
+                            <InputFile style="max-width: 100%;margin-bottom:20px;" OnChange="HandleFileSelected" />
+                            <ValidationMessage For="@(()=>driver.ImageUrl)" />
+                        </div>
+                    </div>
+                    <div class="col-7">
+                        <div class="form-group">
+                            <label for="DriverName">Nombre</label>
+                            <InputText type="text" class="form-control" id="DriverName" @bind-Value="driver.DriverName" placeholder="Ingrese el nombre completo del conductor" />
+                            <ValidationMessage For="@(()=>driver.DriverName)" />
+                        </div>
+                        <div class="form-group">
+                            <label for="DriverPhoneNumber">Telefono</label>
+                            <InputText type="text" class="form-control" id="DriverPhoneNumber" @bind-Value="driver.PhoneNumber" data-mask="0000-0000" placeholder="Telefono del conductor" />
+                            <ValidationMessage For="@(()=>driver.PhoneNumber)" />
+                        </div>
+                        <div class="form-group">
+                            <label for="DriverNUP">Nup</label>
+                            <InputText type="number" class="form-control" id="DriverNUP" @bind-Value="driver.Nup" data-mask="000000000000" placeholder="Nup del conductor" />
+                            <ValidationMessage For="@(()=>driver.Nup)" />
+                        </div>
+                        <div class="form-group">
+                            <label for="DriverNUP">DUI</label>
+                            <InputText type="number" class="form-control" id="DriverDUI" @bind-Value="driver.DUI" data-mask="00000000-0" placeholder="DUI del conductor" />
+                            <ValidationMessage For="@(()=>driver.DUI)" />
+                        </div>
+                        <div class="form-group">
+                            <label for="DriverISSS">ISSS</label>
+                            <InputText type="number" class="form-control" id="DriverISSS" @bind-Value="driver.ISSS" placeholder="ISSS del conductor" />
+                            <ValidationMessage For="@(()=>driver.ISSS)" />
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Tipo de contrato</label>
+                            <InputSelect @bind-Value="driver.HiringType" class="form-control">
+                                @foreach (string name in Enum.GetNames(typeof(DriverEntity.HiringTypeEnum)))
+                                {
+                                    <option value="@name">@name</option>
+                                }
+                            </InputSelect>
+                            <ValidationMessage For="@(()=>driver.HiringType)" />
+                        </div>
+                        <div class="form-group">
+                            <label for="DriverFechaIngreso">Fecha Ingreso</label>
+                            <InputDate class="form-control" id="DriverFechaIngreso" @bind-Value="@driver.HiringDate"></InputDate>
+                            <ValidationMessage For="@(()=>driver.HiringDate)" />
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Estado Conductor</label>
+                            <CustomInputSelect @bind-Value="driver.DriverStatus" class="form-control">
+                                @foreach (var estado in new DriverStates().GetStates())
+                                {
+                                    <option value="@estado.Id">@estado.State</option>
+                                }
+                            </CustomInputSelect>
+                            <ValidationMessage For="@(()=>driver.DriverStatus)" />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="d-flex flex-row-reverse" style="margin-top:6px">
+                    <div>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+</div>
+@code {
+    DriverEntity driver = new DriverEntity() { HiringDate = DateTime.Now };
+    int test = 0;
+    string currentImage;
+    string path = Directory.GetCurrentDirectory();
+    bool imageChange = false;
+    FileEntity _file = new FileEntity();
+    IFileListEntry file;
+    string viewPath;
+    [Parameter]
+    public int id { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        driver = _b_driver.GetDriver(id);
+        if (driver is null) NavManager.NavigateTo("/Driver");
+        viewPath = _configuration.GetSection("FileSetting:DriverViewPath").Value;
+        currentImage = $"{viewPath}{driver.ImageUrl}";
+    }
+    private void HandleValidSubmit()
+    {
+        if (imageChange) _b_file.UploadImageDriver(_file.Base64, driver.ImageUrl);
+        _b_driver.EditDriver(driver);
+        NavManager.NavigateTo("/Driver");
+    }
+    private void select()
+    {
+
+    }
+    async Task HandleFileSelected(IFileListEntry[] files)
+    {
+        file = files.FirstOrDefault();
+        driver.ImageUrl = "";
+        if (file != null)
+        {
+            _file = new FileEntity();
+            await _file.LoadBase64(file.Data);
+            currentImage = $"data:image/png;base64, {_file.Base64}";
+            driver.ImageUrl = $"{DateTime.Now.ToString("yyyyMMddHHmmss")}.png";
+            imageChange = true;
+        }
+    }
+}

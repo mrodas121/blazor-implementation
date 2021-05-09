@@ -1,0 +1,9 @@
+C:\Users\Manuel Rodas\source\repos\TruckLogs\TruckLogs.DataAccess\bin\Debug\netcoreapp3.1\TruckLogs.DataAccess.deps.json
+C:\Users\Manuel Rodas\source\repos\TruckLogs\TruckLogs.DataAccess\bin\Debug\netcoreapp3.1\TruckLogs.DataAccess.dll
+C:\Users\Manuel Rodas\source\repos\TruckLogs\TruckLogs.DataAccess\bin\Debug\netcoreapp3.1\TruckLogs.DataAccess.pdb
+C:\Users\Manuel Rodas\source\repos\TruckLogs\TruckLogs.DataAccess\obj\Debug\netcoreapp3.1\TruckLogs.DataAccess.AssemblyInfoInputs.cache
+C:\Users\Manuel Rodas\source\repos\TruckLogs\TruckLogs.DataAccess\obj\Debug\netcoreapp3.1\TruckLogs.DataAccess.AssemblyInfo.cs
+C:\Users\Manuel Rodas\source\repos\TruckLogs\TruckLogs.DataAccess\obj\Debug\netcoreapp3.1\TruckLogs.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\Manuel Rodas\source\repos\TruckLogs\TruckLogs.DataAccess\obj\Debug\netcoreapp3.1\TruckLogs.DataAccess.dll
+C:\Users\Manuel Rodas\source\repos\TruckLogs\TruckLogs.DataAccess\obj\Debug\netcoreapp3.1\TruckLogs.DataAccess.pdb
+C:\Users\Manuel Rodas\source\repos\TruckLogs\TruckLogs.DataAccess\obj\Debug\netcoreapp3.1\TruckLogs.DataAccess.csprojAssemblyReference.cache
